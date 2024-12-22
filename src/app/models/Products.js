@@ -5,6 +5,7 @@ class Products extends Model {
         super.init({
             name: Sequelize.STRING,
             price: Sequelize.INTEGER,
+            offer: Sequelize.BOOLEAN,
             path: Sequelize.STRING,
             url: {
                 type: Sequelize.VIRTUAL,
@@ -24,7 +25,7 @@ class Products extends Model {
             foreignKey: 'category_id',
             as: 'category',
         });
-
+        return this;
     }
 }
 
