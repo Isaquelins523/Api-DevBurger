@@ -14,12 +14,12 @@ class UserController {
             password: yup.string().min(6).required(),
             admin: yup.boolean()
 
-        }) 
+        })
 
-        try{
-            schemas.validateSync(req.body,{ abortEarly: false})
-        }catch(err){
-            return res.status(400).json({ error: err.errors})
+        try {
+            schemas.validateSync(req.body, { abortEarly: false })
+        } catch (err) {
+            return res.status(400).json({ error: err.errors })
         }
 
         const { name, email, password, admin } = req.body
@@ -30,8 +30,8 @@ class UserController {
             }
         })
 
-        if(userExists){
-            return res.status(400).json({ error: 'User already exists'})
+        if (userExists) {
+            return res.status(409).json({ error: 'User already exists' })
         }
 
         const user = await User.create({
